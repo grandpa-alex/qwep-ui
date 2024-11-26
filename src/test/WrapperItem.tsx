@@ -8,6 +8,7 @@ import {
     BaseTextarea,
     BaseTextField,
     BaseTitle,
+    Icon,
     SimpleTextField,
     SubmitCheckbox,
     SubmitSwitch,
@@ -41,7 +42,7 @@ function WrapperItem() {
                         text: 'SimpleTextField',
                     }}
                 >
-                    <SimpleTextField placeholder={'Placeholder'} />
+                    <SimpleTextField icon={<Icon.Add />} placeholder={'Placeholder'} />
                 </WrapperInput>
                 <WrapperInput
                     positionLabel={'top'}

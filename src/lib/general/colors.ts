@@ -3,8 +3,10 @@ export type Hex = `#${string}`;
 export type TypeColorScheme = {
     primary: Hex;
     secondary: Hex;
+    system: Hex;
 
     //other
+    lightShadow: Hex;
     lightElem: Hex;
     backgroundInfo: Hex;
     backgroundSuccess: Hex;
@@ -47,9 +49,11 @@ export type TypeColorScheme = {
 
 export const colorsLight: TypeColorScheme = {
     primary: '#2563EB',
-    secondary: '#E5F1FF',
+    secondary: '#EFF6FF',
+    system: '#E2E8F0',
 
     //other
+    lightShadow: '#AABDE840',
     lightElem: '#A9C1CF',
     backgroundInfo: '#BFDBFE',
     backgroundSuccess: '#BBF7D0',
@@ -69,7 +73,7 @@ export const colorsLight: TypeColorScheme = {
     warningItemActive: '#C2410C',
 
     //base
-    background: '#ffffff',
+    background: '#CBD5E1',
     backgroundBox: '#ffffff',
     backgroundTooltip: '#1f1f1fc8',
     disabled: '#B9BCBE',
@@ -91,9 +95,11 @@ export const colorsLight: TypeColorScheme = {
 export const colorsDark: TypeColorScheme = {
     primary: '#3B82F6',
     secondary: '#1E293B',
+    system: '#E2E8F0',
 
     //other
     lightElem: '#A9C1CF',
+    lightShadow: '#AABDE840',
     backgroundInfo: '#18338C',
     backgroundSuccess: '#12512A',
     backgroundWarning: '#7B2A0E',

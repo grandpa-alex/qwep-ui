@@ -1,16 +1,17 @@
-import { useColorScheme } from '@src/lib/general/useColorScheme';
-import { useStyleScheme } from '@src/lib/general/useStyleScheme';
+import { BOX_GAP_VARIANT } from '@src/lib/common-styled-component/StyledComponentBox';
+import { getMargin } from '@src/lib/common/getMargin';
+import { SBaseText, TBaseText } from '@src/lib/components/typography/base/BaseText.tsx';
 import { Hex, TypeColorScheme } from '@src/lib/general/colors';
 import { TypeSSBox, TypeSSMR, TypeSSTypography } from '@src/lib/general/styleScheme';
-import React, { useMemo } from 'react';
-import styled, { css } from 'styled-components';
-import { getMargin } from '@src/lib/common/getMargin';
+import { useColorScheme } from '@src/lib/general/useColorScheme';
+import { useStyleScheme } from '@src/lib/general/useStyleScheme';
 import { TMargin } from '@src/lib/types/TypeBase';
-import { BOX_GAP_VARIANT } from '@src/lib/common-styled-component/StyledComponentBox';
 import { TBoxGapVariant } from '@src/lib/types/TypeBox';
 import { EPositionInpLabel, TPositionInpLabel } from '@src/lib/types/TypeInp';
+import { ETextVariant, TTextVariant } from '@src/lib/types/TypeText';
+import React, { useMemo } from 'react';
+import styled, { css } from 'styled-components';
 import { MessageBox, TMessageBox } from './MessageBox';
-import { SBaseText, TBaseText } from '@src/lib/components/typography/base/BaseText.tsx';
 
 type TypeStyles = {
     mr: TypeSSMR;
@@ -21,6 +22,8 @@ type TypeStyles = {
 type WrapperInputProps = {
     id?: string;
     label?: string;
+    width?: string;
+    labelSize?: TTextVariant;
     customLabel?: React.ReactNode;
     required?: boolean;
     positionLabel?: TPositionInpLabel;
@@ -37,6 +40,7 @@ type WrapperInputProps = {
 
 type SRootProps = {
     $mr?: TMargin;
+    $width?: string;
     $blocked?: boolean;
     $colors: TypeColorScheme;
     $styles: TypeStyles;
@@ -67,7 +71,7 @@ const POSITION = {
 const SRoot = styled.div<SRootProps>`
     position: relative;
     max-width: 100%;
-    width: fit-content;
+    width: ${(props) => props.$width ?? '100%'};
     ${(props) => BOX_GAP_VARIANT[props.$boxGapVariant](props.$styles.box)};
     ${(props) => getMargin(props.$styles.mr, props.$mr)}
     ${(props) =>
@@ -91,6 +95,7 @@ const SLabel = styled(SBaseText.Text)<SLabelProps>`
     overflow: hidden;
     flex-shrink: 1;
     width: fit-content;
+    font-weight: ${({ $styles }) => $styles.typography.fontWeightTitle};
     ${(props) =>
         props.$required &&
         css`
@@ -119,10 +124,12 @@ export const WrapperInput = React.memo(
                 $colors,
                 $styles,
                 label,
+                width,
                 message,
-                boxGapVariant = 'g-2',
+                boxGapVariant = 'g-3',
                 labelColor,
                 messageProps,
+                labelSize = ETextVariant.L,
                 labelProps,
                 ...rest
             },
@@ -144,6 +151,7 @@ export const WrapperInput = React.memo(
                     $mr={mr}
                     $positionLabel={positionLabel}
                     $boxGapVariant={boxGapVariant}
+                    $width={width}
                     {...rest}
                 >
                     {customLabel ? (
@@ -152,6 +160,7 @@ export const WrapperInput = React.memo(
                         <SLabel
                             as={'label'}
                             htmlFor={id}
+                            $size={labelSize}
                             $required={required}
                             $colors={colors}
                             $styles={{ typography: styles.typography }}

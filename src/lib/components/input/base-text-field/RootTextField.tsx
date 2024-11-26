@@ -4,8 +4,8 @@ import { Hex, TypeColorScheme } from '@src/lib/general/colors';
 import { TypeSSBase, TypeSSInp, TypeSSMR, TypeSSTypography } from '@src/lib/general/styleScheme';
 import { useColorScheme } from '@src/lib/general/useColorScheme';
 import { useStyleScheme } from '@src/lib/general/useStyleScheme';
-import { TVariantColor, TMargin, TVariantSize, EVariantColor, EVariantSize } from '@src/lib/types/TypeBase';
-import { TInpVariant, EInpVariant } from '@src/lib/types/TypeInp';
+import { EVariantColor, EVariantSize, TMargin, TVariantColor, TVariantSize } from '@src/lib/types/TypeBase';
+import { EInpVariant, TInpVariant } from '@src/lib/types/TypeInp';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
@@ -103,6 +103,7 @@ const SRoot = styled.div<SRootProps>`
     display: inline-block;
     position: relative;
     overflow: hidden;
+    box-sizing: border-box;
 
     font-size: ${({ $styles }) => $styles.typography.fontSizeItem};
     border-radius: ${({ $styles }) => $styles.base.borderRadiusItem};

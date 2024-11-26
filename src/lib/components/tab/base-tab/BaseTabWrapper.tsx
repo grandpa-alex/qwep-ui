@@ -1,12 +1,12 @@
 import * as Tabs from '@radix-ui/react-tabs';
-import { useStyleScheme } from '@src/lib/general/useStyleScheme';
+import { CSSBaseBox } from '@src/lib/common-styled-component/StyledComponentBox.ts';
 import { getMargin } from '@src/lib/common/getMargin';
 import { TypeSSBox, TypeSSMR } from '@src/lib/general/styleScheme';
+import { useStyleScheme } from '@src/lib/general/useStyleScheme';
 import { TMargin, TOrientationContent } from '@src/lib/types/TypeBase';
+import { TBoxGapVariant, TBoxPaddingVariant, TBoxWidthVariant } from '@src/lib/types/TypeBox.ts';
 import React from 'react';
 import styled from 'styled-components';
-import { CSSBaseBox } from '@src/lib/common-styled-component/StyledComponentBox.ts';
-import { TBoxPaddingVariant, TBoxWidthVariant } from '@src/lib/types/TypeBox.ts';
 
 type TypeStyles = {
     mr: TypeSSMR;
@@ -16,6 +16,7 @@ type TypeStyles = {
 type Box = {
     boxWidthVariant?: TBoxWidthVariant;
     boxPaddingVariant?: TBoxPaddingVariant;
+    boxGapVariant?: TBoxGapVariant;
     mr?: TMargin;
     $styles?: TypeStyles;
 };
@@ -27,7 +28,7 @@ type TypeTabsListProps = {
 
 type BaseTabWrapperProps = {
     component?: React.ReactNode;
-    tabs: React.ReactNode[];
+    tabs: React.ReactNode;
     tabsListProps?: TypeTabsListProps;
 } & Box &
     React.ComponentPropsWithRef<typeof Tabs.Root>;
@@ -42,7 +43,8 @@ type SBox = {
 type SRootProps = SBox & React.ComponentPropsWithRef<typeof Tabs.Root>;
 const SRoot = styled(Tabs.Root)<SRootProps>`
     &[data-orientation='vertical'] {
-        display: block;
+        display: flex;
+        flex-direction: column;
     }
 
     &[data-orientation='horizontal'] {
@@ -79,7 +81,7 @@ const SList = styled(Tabs.List)<SListProps>`
 
 export const BaseTabWrapper = React.memo(
     React.forwardRef<HTMLDivElement, BaseTabWrapperProps>(
-        ({ mr, tabs, boxWidthVariant, component, boxPaddingVariant, tabsListProps, $styles, ...rest }, ref) => {
+        ({ mr, tabs, component, boxPaddingVariant, tabsListProps, $styles, ...rest }, ref) => {
             const styles = useStyleScheme(['mr', 'box'], $styles);
 
             return (
@@ -87,22 +89,12 @@ export const BaseTabWrapper = React.memo(
                     ref={ref}
                     $mr={mr}
                     $styles={styles}
-                    $boxWidthVariant={boxWidthVariant}
                     $boxPaddingVariant={boxPaddingVariant}
                     orientation={'vertical'}
                     {...rest}
                 >
                     {component}
-                    <SList
-                        $mr={mr}
-                        $styles={styles}
-                        $boxWidthVariant={boxWidthVariant}
-                        $boxPaddingVariant={boxPaddingVariant}
-                        $orientation={tabsListProps?.orientation ?? 'horizontal'}
-                        {...tabsListProps}
-                    >
-                        {...tabs}
-                    </SList>
+                    <Tabs.List {...tabsListProps}>{tabs}</Tabs.List>
                     {rest.children}
                 </SRoot>
             );

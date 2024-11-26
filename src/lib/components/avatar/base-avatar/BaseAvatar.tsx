@@ -1,13 +1,13 @@
 import * as Avatar from '@radix-ui/react-avatar';
+import { getMargin } from '@src/lib/common/getMargin';
 import { Hex, TypeColorScheme } from '@src/lib/general/colors';
 import { TypeSSAvatar, TypeSSMR } from '@src/lib/general/styleScheme';
 import { useColorScheme } from '@src/lib/general/useColorScheme';
 import { useStyleScheme } from '@src/lib/general/useStyleScheme';
+import { EVariantSizeAvatar, TVariantSizeAvatar } from '@src/lib/types/TypeAvatar';
 import { TMargin } from '@src/lib/types/TypeBase';
 import React, { useCallback } from 'react';
 import styled, { css } from 'styled-components';
-import { TVariantSizeAvatar, EVariantSizeAvatar } from '@src/lib/types/TypeAvatar';
-import { getMargin } from '@src/lib/common/getMargin';
 
 type TypeStyles = {
     avatar: TypeSSAvatar;
@@ -116,7 +116,7 @@ export const BaseAvatar = React.memo(
                     {...rootProps}
                 >
                     <SImg {...rest} />
-                    <SFallback delayMs={600} {...fallbackProps}>
+                    <SFallback delayMs={0} {...fallbackProps}>
                         {getFallbackText(rest.alt)}
                     </SFallback>
                 </SRoot>

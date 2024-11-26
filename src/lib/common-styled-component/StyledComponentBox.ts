@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
-import { TypeSSBox } from '../general/styleScheme';
 import { Hex, TypeColorScheme } from '../general/colors';
+import { TypeSSBox, TypeSSBoxLayout } from '../general/styleScheme';
 import {
     TBoxDisplay,
     TBoxGapVariant,
@@ -9,6 +9,12 @@ import {
     TBoxShadowVariant,
     TBoxWidthVariant,
 } from '../types/TypeBox';
+
+export enum Breakpoints {
+    S = '767px',
+    M = '1280px',
+    L = '1920px',
+}
 
 export const BOX_WIDTH_VARIANT = {
     ['w-1']: (props: TypeSSBox) => css`
@@ -157,4 +163,37 @@ export const CSSSimpleBox = (props: CSSSimplePropsBox) => css`
     css`
         border: 1px solid ${props.$boxBorderColor};
     `}
+`;
+
+export const CSSBoxLayout = (box: TypeSSBoxLayout) => css`
+    border-radius: ${box.boxBorderRadius};
+
+    @media screen and (max-width: 767px) {
+        max-width: ${box.boxWidth_S};
+        padding: ${box.boxPadding_S};
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1278px) {
+        max-width: ${box.boxWidth_M};
+        padding: ${box.boxPadding_M};
+    }
+
+    @media screen and (min-width: 1279px) {
+        width: ${box.boxWidth_L};
+        padding: ${box.boxPadding_L};
+    }
+`;
+
+export const CSSBaseLayout = (box: TypeSSBoxLayout) => css`
+    @media screen and (max-width: 767px) {
+        margin: ${box.margin_S};
+    }
+
+    @media screen and (min-width: 768px) and (max-width: 1278px) {
+        margin: ${box.margin_M};
+    }
+
+    @media screen and (min-width: 1279px) {
+        margin: ${box.margin_L};
+    }
 `;

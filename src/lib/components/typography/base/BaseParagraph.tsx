@@ -1,12 +1,12 @@
+import { getMargin } from '@src/lib/common/getMargin';
 import { TypeSSMR } from '@src/lib/general/styleScheme';
-import React from 'react';
 import { useColorScheme } from '@src/lib/general/useColorScheme';
 import { useStyleScheme } from '@src/lib/general/useStyleScheme';
-import styled from 'styled-components';
-import { getMargin } from '@src/lib/common/getMargin';
 import { TMargin } from '@src/lib/types/TypeBase';
+import { ETextVariant } from '@src/lib/types/TypeText';
+import React from 'react';
+import styled, { css } from 'styled-components';
 import { SBaseText, TBaseText } from './BaseText';
-import { css } from 'styled-components';
 
 type TypeStyles = {
     mr: TypeSSMR;
@@ -37,7 +37,7 @@ const SParagraph = styled(SBaseText.Text)<SParagraphProps>`
 `;
 
 export const BaseParagraph: React.FC<BaseParagraphProps> = React.memo(
-    ({ as: Component = 'p', children, mr, color, isEllipsis, $colors, $styles, ...rest }) => {
+    ({ as: Component = 'p', children, mr, size = ETextVariant.L, color, isEllipsis, $colors, $styles, ...rest }) => {
         const colors = useColorScheme($colors);
         const styles = useStyleScheme(['typography', 'mr'], $styles);
 
@@ -45,6 +45,7 @@ export const BaseParagraph: React.FC<BaseParagraphProps> = React.memo(
             <SParagraph
                 $mr={mr}
                 as={Component}
+                $size={size}
                 $colors={colors}
                 $styles={styles}
                 $isEllipsis={isEllipsis}

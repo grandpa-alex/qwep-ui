@@ -1,12 +1,12 @@
-import { useColorScheme } from '@src/lib/general/useColorScheme';
-import { useStyleScheme } from '@src/lib/general/useStyleScheme';
 import { getColor } from '@src/lib/common/getColor';
 import { getMargin } from '@src/lib/common/getMargin';
 import { itemRippleEffect } from '@src/lib/common/itemRippleEffect';
 import { Hex, TypeColorScheme } from '@src/lib/general/colors';
 import { TypeSSBase, TypeSSBtn, TypeSSMR, TypeSSTypography } from '@src/lib/general/styleScheme';
-import { TVariantColor, TMargin, TVariantSize, EVariantColor, EVariantSize } from '@src/lib/types/TypeBase';
-import { TVariantBtn, EVariantBtn } from '@src/lib/types/TypeBtn';
+import { useColorScheme } from '@src/lib/general/useColorScheme';
+import { useStyleScheme } from '@src/lib/general/useStyleScheme';
+import { EVariantColor, EVariantSize, TMargin, TVariantColor, TVariantSize } from '@src/lib/types/TypeBase';
+import { EVariantBtn, TVariantBtn } from '@src/lib/types/TypeBtn';
 import React from 'react';
 import styled, { css } from 'styled-components';
 
@@ -132,6 +132,7 @@ const BTN_VARIANT = {
 
 export const SButton = styled.button<SButtonProps>`
     display: block;
+    box-sizing: border-box;
     user-select: none;
     position: relative;
     overflow: hidden;

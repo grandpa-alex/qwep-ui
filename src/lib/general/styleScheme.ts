@@ -15,6 +15,7 @@ export type TypeSSMR = {
 
 export type TypeSSBase = {
     borderRadiusItem: string;
+    circleDecorationElem: string;
 };
 
 export type TypeSSBtn = {
@@ -97,7 +98,12 @@ export type TypeSSRadio = {
 
 export type TypeSSTypography = {
     fontSizeItem: string;
+    fontLineHeightItem: string;
     fontSizeGlobal: string;
+    fontSizeGlobal_L: string;
+    fontSizeGlobal_M: string;
+    fontLineHeightGlobal_L: string;
+    fontLineHeightGlobal_M: string;
     h1: string;
     h2: string;
     h3: string;
@@ -140,6 +146,22 @@ export type TypeSSBox = {
     boxGap_6: string;
 };
 
+export type TypeSSBoxLayout = {
+    boxBorderRadius: string;
+
+    boxWidth_L: string;
+    boxWidth_M: string;
+    boxWidth_S: string;
+
+    boxPadding_L: string;
+    boxPadding_M: string;
+    boxPadding_S: string;
+
+    margin_L: string;
+    margin_M: string;
+    margin_S: string;
+};
+
 export type TypeSS = {
     // base
     base: TypeSSBase;
@@ -168,6 +190,9 @@ export type TypeSS = {
 
     //box
     box: TypeSSBox;
+
+    //box layout
+    boxLayout: TypeSSBoxLayout;
 } & {
     [key: string]: string | { [key: string]: string | object };
 };
@@ -176,6 +201,7 @@ export const styleScheme: TypeSS = {
     // base
     base: {
         borderRadiusItem: '8px',
+        circleDecorationElem: '40px',
     },
 
     //margin
@@ -186,7 +212,7 @@ export const styleScheme: TypeSS = {
         margin_4: '20px',
         margin_5: '28px',
         margin_6: '36px',
-        margin_7: '44px',
+        margin_7: '40px',
         margin_8: '52px',
         margin_9: '60px',
         margin_10: '68px',
@@ -233,11 +259,11 @@ export const styleScheme: TypeSS = {
     //avatar
     avatar: {
         avatarSize_1: '24px',
-        avatarSize_2: '32px',
-        avatarSize_3: '45px',
-        avatarFontSize_1: '10px',
-        avatarFontSize_2: '14px',
-        avatarFontSize_3: '20px',
+        avatarSize_2: '40px',
+        avatarSize_3: '96px',
+        avatarFontSize_1: '8px',
+        avatarFontSize_2: '16px',
+        avatarFontSize_3: '40px',
         avatarFontWeight: '600',
     },
 
@@ -284,14 +310,19 @@ export const styleScheme: TypeSS = {
     //text
     typography: {
         fontSizeItem: '14px',
+        fontLineHeightItem: '18px',
         fontSizeGlobal: '14px',
+        fontSizeGlobal_L: '14px',
+        fontSizeGlobal_M: '12px',
+        fontLineHeightGlobal_L: '18px',
+        fontLineHeightGlobal_M: '16px',
         h1: '38px',
         h2: '30px',
         h3: '24px',
         h4: '20px',
         h5: '18px',
         h6: '16px',
-        fontWeightTitle: '400',
+        fontWeightTitle: '600',
         fontWeightItem: '700',
         fontWeightGlobal: '400',
     },
@@ -326,5 +357,20 @@ export const styleScheme: TypeSS = {
         boxGap_4: '20px',
         boxGap_5: '28px',
         boxGap_6: '36px',
+    },
+    boxLayout: {
+        boxBorderRadius: '40px',
+
+        boxWidth_L: '1060px',
+        boxWidth_M: '768px',
+        boxWidth_S: '100%',
+
+        boxPadding_L: '40px 80px 60px 80px',
+        boxPadding_M: '40px 60px 60px 60px',
+        boxPadding_S: '24px 20px 36px 20px',
+
+        margin_L: '68px 30px',
+        margin_M: '40px 20px',
+        margin_S: '40px 15px',
     },
 };

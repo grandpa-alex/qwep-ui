@@ -1,16 +1,17 @@
 import * as Tabs from '@radix-ui/react-tabs';
-import { useStyleScheme } from '@src/lib/general/useStyleScheme';
 import { getMargin } from '@src/lib/common/getMargin';
+import { useColorScheme } from '@src/lib/general';
 import { Hex, TypeColorScheme } from '@src/lib/general/colors';
-import { TypeSSBtn, TypeSSMR, TypeSSTypography } from '@src/lib/general/styleScheme';
-import { TMargin, TVariantSize, EVariantSize } from '@src/lib/types/TypeBase';
+import { TypeSSBox, TypeSSBtn, TypeSSMR, TypeSSTypography } from '@src/lib/general/styleScheme';
+import { useStyleScheme } from '@src/lib/general/useStyleScheme';
+import { EVariantSize, TMargin, TVariantSize } from '@src/lib/types/TypeBase';
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { useColorScheme } from '@src/lib/general';
 
 type TypeStyles = {
     mr: TypeSSMR;
     btn: TypeSSBtn;
+    box: TypeSSBox;
     typography: TypeSSTypography;
 };
 
@@ -47,32 +48,30 @@ const STab = styled(Tabs.Trigger)<STabProps>`
     user-select: none;
     position: relative;
     overflow: hidden;
-    line-height: normal;
+    line-height: ${({ $styles }) => $styles.typography.fontLineHeightItem};
     border: none;
     background-color: transparent;
-    border-bottom: 1px solid transparent;
     outline: 0;
     transition: all 400ms;
+    border: 1px solid ${({ $colors }) => $colors.system};
+    border-radius: ${({ $styles }) => $styles.box.boxBorderRadius_2};
     font-size: ${({ $styles }) => $styles.typography.fontSizeItem};
     cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
     ${(props) => TAB_SIZE[props.$sizeVariant](props.$styles.btn)};
     ${(props) => getMargin(props.$styles.mr, props.$mr)};
 
     &[data-state='active'] {
-        color: ${(props) => props.$colors.primaryItemActive};
-        border-color: ${(props) => props.$colors.primaryItemActive};
+        background-color: ${(props) => props.$colors.secondary};
+        box-shadow: ${(props) => `${props.$styles.box.boxShadow_2} ${props.$colors.lightShadow}`};
+        border-color: ${(props) => props.$colors.secondary};
+        font-weight: ${({ $styles }) => $styles.typography.fontWeightItem};
 
         &:disabled {
             border-color: ${(props) => props.$colors.disabled};
         }
-        &:not([disabled]):hover {
-            color: ${(props) => props.$colors.primaryItemActive};
-            border-color: ${(props) => props.$colors.primaryItemActive};
-        }
     }
     &:not([disabled]):hover {
-        color: ${(props) => props.$colors.primaryItem};
-        border-color: ${(props) => props.$colors.primaryItem};
+        box-shadow: ${(props) => `${props.$styles.box.boxShadow_2} ${props.$colors.lightShadow}`};
     }
     &:disabled {
         color: ${(props) => props.$colors.disabled};
@@ -88,7 +87,7 @@ export const BaseTab = React.memo(
     React.forwardRef<HTMLButtonElement, BaseTabProps>(
         ({ mr, sizeVariant = EVariantSize.L, blocked, $colors, $styles, ...rest }, ref) => {
             const colors = useColorScheme($colors);
-            const styles = useStyleScheme(['mr', 'btn', 'typography'], $styles);
+            const styles = useStyleScheme(['mr', 'box', 'btn', 'typography'], $styles);
 
             return (
                 <STab

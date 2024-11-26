@@ -1,11 +1,12 @@
+import { Copy } from '@src/lib/types/CopyType';
 import { BaseBox, SBaseBox, TBaseBox } from './base-box/BaseBox';
-import { SimpleBox, SSimpleBox, TSimpleBox } from './simple-box/SimpleBox';
 import { BaseContainer, SBaseContainer, TBaseContainer } from './base-container/BaseContainer';
 import { BaseLayout, SBaseLayout, TBaseLayout } from './base-layout/BaseLayout';
 import { BaseMenuGroup, SBaseMenuGroup, TBaseMenuGroup } from './base-menu/BaseMenuGroup';
 import { BaseMenuItem, SBaseMenuItem, TBaseMenuItem } from './base-menu/BaseMenuItem';
-import { Copy } from '@src/lib/types/CopyType';
-export { BaseBox, SimpleBox, BaseContainer, BaseLayout, BaseMenuGroup, BaseMenuItem };
+import { BoxLayout } from './box-layout/BoxLayout';
+import { SimpleBox, SSimpleBox, TSimpleBox } from './simple-box/SimpleBox';
+export { BaseBox, BaseContainer, BaseLayout, BaseMenuGroup, BaseMenuItem, BoxLayout, SimpleBox };
 
 export const BoxStyledComponent = {
     BaseBox: SBaseBox,

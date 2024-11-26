@@ -1,40 +1,36 @@
+import { CSSBaseLayout } from '@src/lib/common-styled-component/StyledComponentBox';
+import { useStyleScheme } from '@src/lib/general';
+import { TypeSSBoxLayout } from '@src/lib/general/styleScheme';
 import React from 'react';
 import { styled } from 'styled-components';
 
+type TypeStyles = {
+    boxLayout: TypeSSBoxLayout;
+};
+
 type BaseLayoutProps = {
-    children?: React.ReactNode;
     as?: keyof JSX.IntrinsicElements;
-    rootProps?: React.HTMLAttributes<HTMLDivElement>;
+    $styles?: TypeStyles;
 } & React.HTMLAttributes<HTMLDivElement>;
 
-const SWrapper = styled.div<React.HTMLAttributes<HTMLDivElement>>`
-    margin: 0 auto;
-    height: 100%;
-    @media screen and (min-width: 1281px) {
-        max-width: 1800px;
-    }
-    @media screen and (max-width: 1280px) {
-        max-width: 100%;
-    }
-`;
+type SRootProps = {
+    $styles: TypeStyles;
+} & React.HTMLAttributes<HTMLDivElement>;
 
-const SRoot = styled.div<React.HTMLAttributes<HTMLDivElement>>`
+const SRoot = styled.div<SRootProps>`
     position: relative;
-    width: 100%;
-    min-width: 100%;
+    max-width: 100%;
     min-height: 100%;
     height: 100%;
-    padding: 0 30px;
-    @media screen and (max-width: 767px) {
-        padding: 0 15px;
-    }
+    ${(props) => CSSBaseLayout(props.$styles.boxLayout)};
 `;
 
 export const BaseLayout = React.memo(
-    React.forwardRef<HTMLDivElement, BaseLayoutProps>(({ as: Component = 'div', rootProps, ...rest }, ref) => {
+    React.forwardRef<HTMLDivElement, BaseLayoutProps>(({ as: Component = 'div', children, $styles, ...rest }, ref) => {
+        const styles = useStyleScheme(['boxLayout'], $styles);
         return (
-            <SRoot ref={ref} as={Component} {...rootProps}>
-                <SWrapper {...rest}>{rest.children}</SWrapper>
+            <SRoot ref={ref} as={Component} $styles={styles} {...rest}>
+                {children}
             </SRoot>
         );
     })
@@ -43,7 +39,6 @@ export const BaseLayout = React.memo(
 //export component
 export const SBaseLayout = {
     Root: SRoot,
-    Layout: SWrapper,
 };
 
 //export type
